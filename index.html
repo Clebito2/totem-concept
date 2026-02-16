@@ -1,27 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conceito TOTEM | Live Consultoria</title>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <style>
         :root {
             /* Live Consultoria Design System V6.0 Tokens */
-            --live-deep: #0F172A; /* Deep Slate Blue */
-            --live-accent: #10B981; /* Emerald Green */
-            --live-glass: rgba(255, 255, 255, 0.05);
-            --live-text: #F8FAFC;
-            --live-muted: #94A3B8;
-            
-            /* Totem Brand Identity */
+
+            /* --- Atmosfera (Backgrounds) --- */
+            --live-deep: #06192a;
+            /* Fundo Absoluto */
+
+            /* --- Superfícies (Refractive Glass) --- */
+            --live-glass: rgba(10, 36, 61, 0.70);
+            --live-glass-hover: rgba(15, 45, 75, 0.85);
+
+            /* --- Luz & Ação --- */
+            --live-accent: #00e800;
+            /* Verde Laser */
+            --live-accent-dim: rgba(0, 232, 0, 0.15);
+            --kinetic-gradient: linear-gradient(90deg, #ffffff 0%, #cccccc 50%, #00e800 100%);
+
+            /* --- Física de Animação --- */
+            --spring-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease-fluid: cubic-bezier(0.4, 0.0, 0.2, 1);
+
+            /* --- Bordas Inteligentes --- */
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-active: rgba(0, 232, 0, 0.4);
+
+            /* --- Totem Brand Specifics --- */
             --totem-gold: #D4AF37;
-            --totem-dark: #050505;
+            --text-primary: #ffffff;
+            --text-muted: #cccccc;
         }
 
         * {
@@ -32,13 +53,17 @@
 
         body {
             background-color: var(--live-deep);
-            color: var(--live-text);
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            background-attachment: fixed;
+            color: var(--text-primary);
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        h1, h2, h3 {
+        h1,
+        h2,
+        h3 {
             font-family: 'Merriweather', serif;
             font-weight: 700;
         }
@@ -47,6 +72,19 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Header */
@@ -54,33 +92,47 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--live-glass);
-            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 50px;
         }
 
-        .logo {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--live-accent);
-            letter-spacing: -0.5px;
+        .logo img {
+            height: 40px;
+            /* Adjust based on actual logo ratio */
+            filter: drop-shadow(0 0 8px rgba(0, 232, 0, 0.3));
         }
 
         .tag {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--live-muted);
-            border: 1px solid var(--live-glass);
-            padding: 4px 12px;
+            letter-spacing: 1.5px;
+            color: var(--live-accent);
+            border: 1px solid var(--live-accent-dim);
+            padding: 6px 16px;
             border-radius: 20px;
+            background: var(--live-accent-dim);
         }
 
         /* Hero */
         .hero {
             text-align: center;
-            padding: 60px 0;
-            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            padding: 80px 0;
+            position: relative;
+        }
+
+        /* Flashlight Effect Simulation for Hero */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
         }
 
         .hero-subtitle {
@@ -88,147 +140,178 @@
             letter-spacing: 4px;
             color: var(--totem-gold);
             font-size: 0.9rem;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             font-family: 'Poppins', sans-serif;
+            font-weight: 600;
         }
 
         .hero-title {
-            font-size: 4rem;
+            font-size: 4.5rem;
             line-height: 1;
             margin-bottom: 24px;
-            background: linear-gradient(to bottom, #fff, #999);
+            background: linear-gradient(90deg, #D4AF37 0%, #F8F8F8 50%, #D4AF37 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
         }
 
         .hero-desc {
-            font-size: 1.2rem;
-            color: var(--live-muted);
+            font-size: 1.25rem;
+            color: var(--text-muted);
             max-width: 600px;
             margin: 0 auto;
+            font-weight: 300;
         }
 
-        /* Cards */
+        /* Cards with Physics & Glassmorphism */
         .card {
             background: var(--live-glass);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
             padding: 32px;
             margin-bottom: 24px;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Spring bounce */
+            transition: transform 0.4s var(--spring-bounce),
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.01);
             border-color: var(--live-accent);
-            box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.2); /* Halo hover */
+            box-shadow: 0 20px 40px -10px rgba(0, 232, 0, 0.15);
         }
 
-        .card.totem-style {
-            border-color: var(--totem-gold);
-        }
-        
         .card.totem-style:hover {
-            box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.2);
+            border-color: var(--totem-gold);
+            box-shadow: 0 20px 40px -10px rgba(212, 175, 55, 0.15);
         }
 
         .card-icon {
-            font-size: 2rem;
-            margin-bottom: 16px;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
             display: block;
         }
 
         .card h3 {
             margin-bottom: 12px;
-            color: var(--live-text);
+            color: var(--text-primary);
+            font-size: 1.4rem;
         }
 
         .card p {
-            color: var(--live-muted);
-            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 300;
         }
 
-        /* Section Titles */
+        /* Section Titles Kinetic */
         .section-title {
-            font-size: 1.8rem;
-            margin: 60px 0 30px;
+            font-size: 2rem;
+            margin: 80px 0 40px;
             padding-left: 20px;
-            border-left: 3px solid var(--live-accent);
+            border-left: 4px solid var(--live-accent);
+            background: var(--kinetic-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        
+
         .section-title.gold {
             border-color: var(--totem-gold);
+            background: linear-gradient(90deg, #D4AF37 0%, #FFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* List */
+        /* Strategy List */
         ul.strategy-list {
             list-style: none;
         }
-        
+
         ul.strategy-list li {
-            margin-bottom: 16px;
-            padding-left: 24px;
+            margin-bottom: 20px;
+            padding-left: 30px;
             position: relative;
-            color: var(--live-muted);
+            color: var(--text-muted);
+            font-size: 1.05rem;
         }
-        
+
         ul.strategy-list li::before {
-            content: "•";
+            content: "➜";
             color: var(--totem-gold);
             position: absolute;
             left: 0;
             font-weight: bold;
         }
-        
-        strong.gold {
-            color: var(--totem-gold);
-        }
 
-        /* Visual Identity Grid */
+        /* Visual Grid */
         .visual-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            gap: 24px;
             margin-top: 30px;
         }
-        
+
         .visual-item {
-            background: #000;
-            padding: 24px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
             border-radius: 12px;
-            border: 1px solid #333;
+            border: 1px solid var(--border-subtle);
             text-align: center;
+            transition: all 0.3s var(--ease-fluid);
         }
-        
+
+        .visual-item:hover {
+            border-color: var(--totem-gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
         .visual-title {
             color: var(--totem-gold);
             font-family: 'Merriweather', serif;
-            margin-bottom: 8px;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
             display: block;
+            font-weight: 700;
         }
 
         /* Footer */
         footer {
-            margin-top: 80px;
+            margin-top: 100px;
             padding: 40px 0;
-            border-top: 1px solid var(--live-glass);
+            border-top: 1px solid var(--border-subtle);
             text-align: center;
-            font-size: 0.8rem;
-            color: var(--live-muted);
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
 
         .dev-credit {
-            margin-top: 8px;
-            opacity: 0.6;
+            margin-top: 10px;
+            opacity: 0.7;
+            font-size: 0.75rem;
+            transition: color 0.3s;
         }
 
+        .dev-credit a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .dev-credit a:hover {
+            color: var(--live-accent);
+        }
     </style>
 </head>
+
 <body>
 
     <div class="container">
         <header>
-            <div class="logo">● Live Consultoria</div>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/Clebito2/ConsultoriaLive/main/Logo%20live%20oficial-21.png"
+                    alt="Live Consultoria">
+            </div>
             <div class="tag">Naming Project V1.0</div>
         </header>
 
@@ -242,58 +325,81 @@
         <div class="card totem-style">
             <span class="card-icon">🗿</span>
             <h3>O Objeto Sagrado</h3>
-            <p>O Totem não é apenas um marco físico. Na antropologia, é o emblema que une um clã. Ele conta a história da linhagem e estabelece a hierarquia sagrada da tribo.</p>
+            <p>O Totem não é apenas um marco físico. Na antropologia, é o emblema que une um clã. Ele conta a história
+                da linhagem e estabelece a hierarquia sagrada da tribo.</p>
         </div>
-        
+
         <div class="card totem-style">
             <span class="card-icon">🦅</span>
             <h3>A Ascensão Vertical</h3>
-            <p>Diferente de nomes horizontais, TOTEM é vertical. Representa a jornada do aluno: começando na base (terra) e subindo os níveis de consciência até o topo (águia/céu).</p>
+            <p>Diferente de nomes horizontais, TOTEM é vertical. Representa a jornada do aluno: começando na base
+                (terra) e subindo os níveis de consciência até o topo (águia/céu).</p>
         </div>
 
         <h2 class="section-title">2. Estratégia Jurídica (INPI Defense)</h2>
-        <p style="margin-bottom: 20px; color: var(--live-muted);">Como "Totem" é um termo comum, adotamos a estratégia de <strong>Naming Composto</strong> na Classe 41 (Educação) para garantir a exclusividade:</p>
-        
+        <p style="margin-bottom: 25px; color: var(--text-muted); font-size: 1.05rem;">Como "Totem" é um termo comum,
+            adotamos a estratégia de <strong>Naming Composto</strong> na Classe 41 (Educação) para garantir a
+            exclusividade:</p>
+
         <div class="visual-grid">
             <div class="visual-item">
                 <span class="visual-title">PROJECT TOTEM</span>
-                <p style="font-size: 0.8rem; color: #666;">Moderno, Secreto, Militar.</p>
+                <p style="font-size: 0.9rem; color: #aaa;">Moderno, Secreto, Militar.</p>
             </div>
             <div class="visual-item">
                 <span class="visual-title">TOTEM EQUITY</span>
-                <p style="font-size: 0.8rem; color: #666;">Foco em Resultado Financeiro.</p>
+                <p style="font-size: 0.9rem; color: #aaa;">Foco em Resultado Financeiro.</p>
             </div>
             <div class="visual-item">
                 <span class="visual-title">TOTEM LEGACY</span>
-                <p style="font-size: 0.8rem; color: #666;">Foco em Construção de História.</p>
+                <p style="font-size: 0.9rem; color: #aaa;">Foco em Construção de História.</p>
             </div>
         </div>
 
         <h2 class="section-title gold">3. Identidade Visual</h2>
         <div class="card">
             <h3>🎨 Paleta de Cores</h3>
-            <div style="display: flex; gap: 10px; margin-top: 15px;">
-                <div style="width: 50px; height: 50px; background: #D4AF37; border-radius: 50%; border: 2px solid #fff;"></div>
-                <div style="width: 50px; height: 50px; background: #050505; border-radius: 50%; border: 2px solid #333;"></div>
-                <div style="width: 50px; height: 50px; background: #F8FAFC; border-radius: 50%; border: 2px solid #333;"></div>
+            <div style="display: flex; gap: 15px; margin-top: 20px;">
+                <div style="text-align: center;">
+                    <div
+                        style="width: 60px; height: 60px; background: #D4AF37; border-radius: 50%; border: 2px solid rgba(255,255,255,0.1); margin: 0 auto;">
+                    </div>
+                    <span style="display: block; margin-top: 8px; font-size: 0.8rem; color: #aaa;">Totem Gold</span>
+                </div>
+                <div style="text-align: center;">
+                    <div
+                        style="width: 60px; height: 60px; background: #050505; border-radius: 50%; border: 2px solid #333; margin: 0 auto;">
+                    </div>
+                    <span style="display: block; margin-top: 8px; font-size: 0.8rem; color: #aaa;">Obsidian</span>
+                </div>
+                <div style="text-align: center;">
+                    <div
+                        style="width: 60px; height: 60px; background: #06192a; border-radius: 50%; border: 2px solid #333; margin: 0 auto;">
+                    </div>
+                    <span style="display: block; margin-top: 8px; font-size: 0.8rem; color: #aaa;">Live Deep</span>
+                </div>
             </div>
-            <p style="margin-top: 10px;"><strong>Ouro Metálico</strong> (Valor, Nobreza) sobre <strong>Obsidiana</strong> (Mistério, Profundidade).</p>
         </div>
 
         <div class="card">
             <h3>📐 O Símbolo (Logo)</h3>
             <ul class="strategy-list">
-                <li><strong>O Pilar Minimalista:</strong> Blocos de ouro empilhados verticalmente, representando os níveis de mentoria.</li>
-                <li><strong>Tipografia Monolítica:</strong> Um "T" desenhado como uma coluna arquitetônica, passando solidez absoluta.</li>
-                <li><strong>Geometria Sagrada:</strong> A base (quadrado), o meio (círculo) e o topo (triângulo) alinhados.</li>
+                <li><strong>O Pilar Minimalista:</strong> Blocos de ouro empilhados verticalmente, representando os
+                    níveis de mentoria.</li>
+                <li><strong>Tipografia Monolítica:</strong> Um "T" desenhado como uma coluna arquitetônica, passando
+                    solidez absoluta.</li>
+                <li><strong>Geometria Sagrada:</strong> A base (quadrado), o meio (círculo) e o topo (triângulo)
+                    alinhados.</li>
             </ul>
         </div>
 
         <footer>
-            <div>© 2026 Live Consultoria</div>
-            <div class="dev-credit">₢ Powered by Cléber Donato</div>
+            <div>© 2026 Live Consultoria - Todos os direitos reservados.</div>
+            <div class="dev-credit">₢ Powered by Cléber Donato <a
+                    href="mailto:cleberdonato@ecossistemalive.com.br">cleberdonato@ecossistemalive.com.br</a></div>
         </footer>
     </div>
 
 </body>
+
 </html>
