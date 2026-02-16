@@ -41,6 +41,7 @@
 
             /* --- Totem Brand Specifics --- */
             --totem-gold: #D4AF37;
+            --totem-gold-dim: rgba(212, 175, 55, 0.1);
             --text-primary: #ffffff;
             --text-muted: #cccccc;
         }
@@ -69,7 +70,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px;
             animation: fadeIn 1s ease-out;
@@ -99,7 +100,6 @@
 
         .logo img {
             height: 40px;
-            /* Adjust based on actual logo ratio */
             filter: drop-shadow(0 0 8px rgba(0, 232, 0, 0.3));
         }
 
@@ -121,16 +121,15 @@
             position: relative;
         }
 
-        /* Flashlight Effect Simulation for Hero */
         .hero::before {
             content: '';
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 60%);
             pointer-events: none;
             z-index: -1;
         }
@@ -143,82 +142,136 @@
             margin-bottom: 20px;
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
+            display: inline-block;
+            border-bottom: 1px solid var(--totem-gold);
+            padding-bottom: 5px;
         }
 
         .hero-title {
-            font-size: 4.5rem;
+            font-size: 5rem;
             line-height: 1;
             margin-bottom: 24px;
-            background: linear-gradient(90deg, #D4AF37 0%, #F8F8F8 50%, #D4AF37 100%);
+            background: linear-gradient(135deg, #FFF 0%, #D4AF37 50%, #8a6e1c 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -2px;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .hero-desc {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             color: var(--text-muted);
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
             font-weight: 300;
         }
 
-        /* Cards with Physics & Glassmorphism */
+        /* Logo Concept Display */
+        .logo-showcase {
+            display: flex;
+            justify-content: center;
+            margin: 60px 0;
+        }
+
+        .logo-container {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.2), transparent);
+            border: 1px solid var(--totem-gold-dim);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.1);
+            animation: pulseGlow 4s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            from {
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+            }
+
+            to {
+                box-shadow: 0 0 60px rgba(212, 175, 55, 0.3);
+            }
+        }
+
+        /* SVG Warrior Helmet */
+        .warrior-helm {
+            width: 120px;
+            height: 120px;
+            fill: var(--totem-gold);
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+        }
+
+        /* Cards */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
         .card {
             background: var(--live-glass);
             border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 32px;
+            border-radius: 16px;
+            padding: 40px;
             margin-bottom: 24px;
-            transition: transform 0.4s var(--spring-bounce),
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
-            backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            transition: all 0.4s var(--spring-bounce);
+            backdrop-filter: blur(16px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
         }
 
         .card:hover {
-            transform: translateY(-8px) scale(1.01);
-            border-color: var(--live-accent);
-            box-shadow: 0 20px 40px -10px rgba(0, 232, 0, 0.15);
+            transform: translateY(-8px);
+            border-color: var(--totem-gold);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
         }
 
-        .card.totem-style:hover {
-            border-color: var(--totem-gold);
-            box-shadow: 0 20px 40px -10px rgba(212, 175, 55, 0.15);
+        .card:hover::after {
+            opacity: 1;
         }
 
         .card-icon {
             font-size: 2.5rem;
             margin-bottom: 20px;
             display: block;
+            color: var(--totem-gold);
         }
 
         .card h3 {
             margin-bottom: 12px;
             color: var(--text-primary);
-            font-size: 1.4rem;
+            font-size: 1.5rem;
         }
 
         .card p {
             color: var(--text-muted);
             font-size: 1rem;
             font-weight: 300;
+            line-height: 1.7;
         }
 
-        /* Section Titles Kinetic */
+        /* Section Titles */
         .section-title {
-            font-size: 2rem;
-            margin: 80px 0 40px;
+            font-size: 2.2rem;
+            margin: 100px 0 40px;
             padding-left: 20px;
-            border-left: 4px solid var(--live-accent);
-            background: var(--kinetic-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .section-title.gold {
-            border-color: var(--totem-gold);
+            border-left: 4px solid var(--totem-gold);
             background: linear-gradient(90deg, #D4AF37 0%, #FFF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -230,19 +283,18 @@
         }
 
         ul.strategy-list li {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             padding-left: 30px;
             position: relative;
             color: var(--text-muted);
-            font-size: 1.05rem;
+            font-size: 1.1rem;
         }
 
         ul.strategy-list li::before {
-            content: "➜";
-            color: var(--totem-gold);
+            content: "🛡️";
             position: absolute;
             left: 0;
-            font-weight: bold;
+            font-size: 0.9em;
         }
 
         /* Visual Grid */
@@ -265,6 +317,7 @@
         .visual-item:hover {
             border-color: var(--totem-gold);
             background: rgba(212, 175, 55, 0.05);
+            transform: translateY(-5px);
         }
 
         .visual-title {
@@ -278,7 +331,7 @@
 
         /* Footer */
         footer {
-            margin-top: 100px;
+            margin-top: 120px;
             padding: 40px 0;
             border-top: 1px solid var(--border-subtle);
             text-align: center;
@@ -286,20 +339,24 @@
             color: var(--text-muted);
         }
 
-        .dev-credit {
-            margin-top: 10px;
-            opacity: 0.7;
-            font-size: 0.75rem;
-            transition: color 0.3s;
-        }
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
 
-        .dev-credit a {
-            color: var(--text-muted);
-            text-decoration: none;
-        }
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
 
-        .dev-credit a:hover {
-            color: var(--live-accent);
+            .logo-container {
+                width: 150px;
+                height: 150px;
+            }
+
+            .warrior-helm {
+                width: 90px;
+                height: 90px;
+            }
         }
     </style>
 </head>
@@ -316,81 +373,82 @@
         </header>
 
         <section class="hero">
-            <div class="hero-subtitle">The Final Concept</div>
+            <div class="hero-subtitle">Conceito Final</div>
             <h1 class="hero-title">TOTEM</h1>
-            <p class="hero-desc">O símbolo sagrado da tribo. O pilar que sustenta o legado e conecta a base ao topo.</p>
+            <p class="hero-desc">O Guardião do Legado. A autoridade que protege a tribo e guia a ascensão dos
+                escolhidos.</p>
         </section>
 
-        <h2 class="section-title gold">1. A Narrativa (Storytelling)</h2>
-        <div class="card totem-style">
-            <span class="card-icon">🗿</span>
-            <h3>O Objeto Sagrado</h3>
-            <p>O Totem não é apenas um marco físico. Na antropologia, é o emblema que une um clã. Ele conta a história
-                da linhagem e estabelece a hierarquia sagrada da tribo.</p>
+        <!-- New Logo Concept Section -->
+        <div class="logo-showcase">
+            <div class="logo-container" title="O Guardião de Ferro">
+                <!-- SVG Warrior Helmet Icon -->
+                <svg class="warrior-helm" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 2C8 2 4 4 4 8v6c0 5 4 8 8 8s8-3 8-8V8c0-4-4-6-8-6zm0 2c3.5 0 6 2 6 5v1h-2v-1c0-1.5-1-2-2-2h-4c-1 0-2 .5-2 2v1H6V9c0-3 2.5-5 6-5zm0 16c-3 0-6-2.5-6-6v-1h3v2h6v-2h3v1c0 3.5-3 6-6 6z" />
+                    <path d="M9 11h2v4H9zm4 0h2v4h-2z" opacity="0.8" />
+                </svg>
+            </div>
         </div>
 
-        <div class="card totem-style">
-            <span class="card-icon">🦅</span>
-            <h3>A Ascensão Vertical</h3>
-            <p>Diferente de nomes horizontais, TOTEM é vertical. Representa a jornada do aluno: começando na base
-                (terra) e subindo os níveis de consciência até o topo (águia/céu).</p>
+        <h2 class="section-title">1. A Narrativa do Guardião</h2>
+
+        <div class="card">
+            <h3>🛡️ O Protetor da Tribo</h3>
+            <p>O conceito de Totem evoluiu. Não é apenas o pilar estático, é uma entidade viva. O <strong>Guardião
+                    (Warrior)</strong> representa a defesa intransigente dos valores e do patrimônio (Equity) do clã.
+            </p>
+            <p style="margin-top: 15px;">Quem entra na mentoria não ganha apenas conhecimento; ganha a proteção de uma
+                ordem antiga e forte.</p>
         </div>
 
-        <h2 class="section-title">2. Estratégia Jurídica (INPI Defense)</h2>
-        <p style="margin-bottom: 25px; color: var(--text-muted); font-size: 1.05rem;">Como "Totem" é um termo comum,
-            adotamos a estratégia de <strong>Naming Composto</strong> na Classe 41 (Educação) para garantir a
-            exclusividade:</p>
+        <div class="grid-2">
+            <div class="card totem-style">
+                <span class="card-icon">⚔️</span>
+                <h3>Disciplina Militar</h3>
+                <p>O capacete do guerreiro simboliza a "Mente Blindada" (Invictus). O mentor ensina a estratégia de
+                    guerra para vencer no mercado.</p>
+            </div>
+
+            <div class="card totem-style">
+                <span class="card-icon">🏛️</span>
+                <h3>Ancestralidade</h3>
+                <p>O Totem conecta o passado (sabedoria antiga) ao futuro (legado). É a ponte sólida entre gerações de
+                    líderes.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">2. Identidade Visual (O Guardião)</h2>
+        <div class="card">
+            <h3>📐 O Símbolo: "The Iron Watcher"</h3>
+            <ul class="strategy-list">
+                <li><strong>O Elmo Espartano:</strong> Minimalista, imponente, olhando para frente. Representa foco
+                    total e ausência de medo.</li>
+                <li><strong>A Fusão T+Guerreiro:</strong> O formato do capacete desenha sutilmente a letra "T" no espaço
+                    negativo do visor.</li>
+                <li><strong>Textura de Metal Nobre:</strong> Ouro envelhecido ou Bronze, sugerindo que a marca resistiu
+                    ao teste do tempo.</li>
+            </ul>
+        </div>
+
+        <h2 class="section-title">3. Estratégia de Naming (Variações)</h2>
+        <p style="margin-bottom: 25px; color: var(--text-muted); font-size: 1.05rem;">Para registrar no INPI (Classe 41)
+            e fugir do lugar comum, usamos "Sobrenomes de Poder":</p>
 
         <div class="visual-grid">
             <div class="visual-item">
                 <span class="visual-title">PROJECT TOTEM</span>
-                <p style="font-size: 0.9rem; color: #aaa;">Moderno, Secreto, Militar.</p>
+                <p style="font-size: 0.9rem; color: #aaa;">"Operação Secreta". O nome do projeto que vai mudar sua vida.
+                </p>
             </div>
             <div class="visual-item">
-                <span class="visual-title">TOTEM EQUITY</span>
-                <p style="font-size: 0.9rem; color: #aaa;">Foco em Resultado Financeiro.</p>
+                <span class="visual-title">THE TOTEM</span>
+                <p style="font-size: 0.9rem; color: #aaa;">Absoluto. A referência única no mercado.</p>
             </div>
             <div class="visual-item">
-                <span class="visual-title">TOTEM LEGACY</span>
-                <p style="font-size: 0.9rem; color: #aaa;">Foco em Construção de História.</p>
+                <span class="visual-title">TOTEM DYNASTY</span>
+                <p style="font-size: 0.9rem; color: #aaa;">Foco na construção de dinastias empresariais.</p>
             </div>
-        </div>
-
-        <h2 class="section-title gold">3. Identidade Visual</h2>
-        <div class="card">
-            <h3>🎨 Paleta de Cores</h3>
-            <div style="display: flex; gap: 15px; margin-top: 20px;">
-                <div style="text-align: center;">
-                    <div
-                        style="width: 60px; height: 60px; background: #D4AF37; border-radius: 50%; border: 2px solid rgba(255,255,255,0.1); margin: 0 auto;">
-                    </div>
-                    <span style="display: block; margin-top: 8px; font-size: 0.8rem; color: #aaa;">Totem Gold</span>
-                </div>
-                <div style="text-align: center;">
-                    <div
-                        style="width: 60px; height: 60px; background: #050505; border-radius: 50%; border: 2px solid #333; margin: 0 auto;">
-                    </div>
-                    <span style="display: block; margin-top: 8px; font-size: 0.8rem; color: #aaa;">Obsidian</span>
-                </div>
-                <div style="text-align: center;">
-                    <div
-                        style="width: 60px; height: 60px; background: #06192a; border-radius: 50%; border: 2px solid #333; margin: 0 auto;">
-                    </div>
-                    <span style="display: block; margin-top: 8px; font-size: 0.8rem; color: #aaa;">Live Deep</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h3>📐 O Símbolo (Logo)</h3>
-            <ul class="strategy-list">
-                <li><strong>O Pilar Minimalista:</strong> Blocos de ouro empilhados verticalmente, representando os
-                    níveis de mentoria.</li>
-                <li><strong>Tipografia Monolítica:</strong> Um "T" desenhado como uma coluna arquitetônica, passando
-                    solidez absoluta.</li>
-                <li><strong>Geometria Sagrada:</strong> A base (quadrado), o meio (círculo) e o topo (triângulo)
-                    alinhados.</li>
-            </ul>
         </div>
 
         <footer>
